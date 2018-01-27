@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { DatePicker } from 'antd';
 
 export default class Example extends Component {
     render() {
@@ -11,7 +12,7 @@ export default class Example extends Component {
                             <div className="panel-heading">Example Component</div>
 
                             <div className="panel-body">
-                                I'm an example component!
+                                <DatePicker />
                             </div>
                         </div>
                     </div>
