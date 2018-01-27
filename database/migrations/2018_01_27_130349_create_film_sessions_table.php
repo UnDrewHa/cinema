@@ -18,7 +18,7 @@ class CreateFilmSessionsTable extends Migration
             $table->integer('film_license_id');
             $table->integer('hall_id');
             $table->dateTime('start_from');
-            $table->timestamps();
+//            $table->timestamps();
         });
     }
 

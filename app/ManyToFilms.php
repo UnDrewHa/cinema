@@ -9,4 +9,6 @@ class ManyToFilms extends Model
     public function films() {
         return $this->hasMany(Film::class);
     }
+
+    public $timestamps = false;
 }

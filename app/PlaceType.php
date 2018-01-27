@@ -9,4 +9,6 @@ class PlaceType extends Model
     public function places() {
         return $this->hasMany(HallPlace::class);
     }
+
+    public $timestamps = false;
 }

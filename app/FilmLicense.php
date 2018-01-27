@@ -21,4 +21,6 @@ class FilmLicense extends Model
     public function filmSessions() {
         return $this->hasMany(FilmSession::class);
     }
+
+    public $timestamps = false;
 }

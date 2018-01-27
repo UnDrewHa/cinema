@@ -13,4 +13,6 @@ class FilmSession extends Model
     public function hall() {
         return $this->belongsTo(Hall::class);
     }
+
+    public $timestamps = false;
 }

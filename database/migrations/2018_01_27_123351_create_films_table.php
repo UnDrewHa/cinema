@@ -24,7 +24,7 @@ class CreateFilmsTable extends Migration
             $table->text('description');
             $table->string('trailer');
             $table->string('cover');
-            $table->timestamps();
+//            $table->timestamps();
         });
     }
 

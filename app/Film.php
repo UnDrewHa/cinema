@@ -22,11 +22,13 @@ class Film extends Model
         return $this->belongsTo(Country::class);
     }
 
-    public function actor() {
+    public function actors() {
         return $this->belongsToMany(Actor::class);
     }
 
     public function licenses() {
         return $this->hasMany(FilmLicense::class);
     }
+
+    public $timestamps = false;
 }
