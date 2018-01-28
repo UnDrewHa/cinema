@@ -3,7 +3,7 @@ import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { Card, Form, Icon, Input, Button } from 'antd';
+import { Card, Form, Icon, Input, Button, notification } from 'antd';
 import { AuthActions } from '../Actions/AuthActions';
 import { AuthServices } from '../Services/AuthServices';
 
@@ -26,7 +26,16 @@ class RegisterForm extends React.Component {
             email,
             password,
             c_password
-        }).then(() => history.push('/auth'))
+        }).then(() => {
+            notification.open({
+                description: "Успешно зарегистрировались",
+                duration: 4,
+                placement: "bottomRight",
+                message: "Регистрация",
+                type: 'success'
+            });
+            history.push('/auth');
+        })
     };
     
     handleFieldChange = (e) => {
