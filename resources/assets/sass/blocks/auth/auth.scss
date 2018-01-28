@@ -1,0 +1,11 @@
+.auth-form {
+    align-self: center;
+    margin-top: 100px;
+    width: 330px;
+}
+
+.login-form {
+    &-button {
+        width: 100%;
+    }
+}

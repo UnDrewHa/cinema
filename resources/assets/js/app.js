@@ -1,16 +1,45 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import axios from 'axios';
+import {
+    BrowserRouter,
+    Switch,
+    Redirect,
+    Route
+} from 'react-router-dom';
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import { createLogger } from 'redux-logger'
+import { Layout } from 'antd';
+import { Auth } from './modules/Auth/Pages/Auth';
+import { AuthReducer } from './modules/Auth/Reducers/AuthReducers';
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes React and other helpers. It's a great starting point while
- * building robust, powerful web applications using React + Laravel.
- */
+const loggerMiddleware = createLogger();
 
-require('./bootstrap');
+const store = createStore(
+    AuthReducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    applyMiddleware(
+        thunkMiddleware,
+        loggerMiddleware
+    )
+);
 
-/**
- * Next, we will create a fresh React component instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+const App = () => {
+    return (
+        <Switch>
+            <Route exact path="/" render={() => <Redirect to="/auth" />} />
+            <Route path="/auth" component={Auth} />
+        </Switch>
+    );
+};
 
-require('./components/Example');
+ReactDOM.render(
+    <Provider store={store}>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </Provider>,
+    document.getElementById('app')
+);
