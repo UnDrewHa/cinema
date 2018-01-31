@@ -11,4 +11,6 @@ class Cinema extends Model
     }
 
     public $timestamps = false;
+
+    public $guarded = [];
 }

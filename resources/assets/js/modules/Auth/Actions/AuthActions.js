@@ -1,5 +1,5 @@
 import { AUTH_LOGIN, AUTH_REGISTER, AUTH_RESET } from './actionTypes';
-import { createAsyncAction } from '../../../core/createAsyncAction'
+import { createAsyncAction } from '../../../base/createAsyncAction'
 
 export class AuthActions {
     constructor(services, dispatch) {

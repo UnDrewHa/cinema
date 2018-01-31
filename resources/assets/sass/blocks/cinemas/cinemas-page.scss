@@ -1,0 +1,21 @@
+.cinemas-page {
+    .cinema-item {
+        display: flex;
+        flex-direction: column;
+        .ant-card {
+            flex: 1;
+        }
+    }
+
+    .cinema-add-item {
+        text-align: center;
+        .anticon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 80px;
+            opacity: .1;
+        }
+    }
+}

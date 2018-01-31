@@ -1,5 +1,5 @@
-import { initialState } from '../../../store/initialState';
-import { BEGIN, SUCCESS, FAILURE } from '../../../core/baseActionTypes'
+import { initialState } from '../../../base/initialState';
+import { BEGIN, SUCCESS, FAILURE } from '../../../base/actionTypes'
 import { AUTH_LOGIN, AUTH_REGISTER, AUTH_RESET } from '../Actions/actionTypes';
 
 export function AuthReducer(prevState = initialState, action) {

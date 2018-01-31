@@ -13,6 +13,7 @@ import thunkMiddleware from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import { Layout } from 'antd';
 import { Auth } from './modules/Auth/Pages/Auth';
+import { Main } from './modules/Main/Pages/Main';
 import { AuthReducer } from './modules/Auth/Reducers/AuthReducers';
 
 const loggerMiddleware = createLogger();
@@ -29,7 +30,8 @@ const store = createStore(
 const App = () => {
     return (
         <Switch>
-            <Route exact path="/" render={() => <Redirect to="/auth" />} />
+            <Route exact path="/" render={() => <Redirect to="/main" />} />
+            <Route path="/main" component={Main} />
             <Route path="/auth" component={Auth} />
         </Switch>
     );
