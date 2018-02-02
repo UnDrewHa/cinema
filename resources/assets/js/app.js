@@ -29,11 +29,7 @@ const store = createStore(
 
 const App = () => {
     return (
-        <Switch>
-            <Route exact path="/" render={() => <Redirect to="/main" />} />
-            <Route path="/main" component={Main} />
-            <Route path="/auth" component={Auth} />
-        </Switch>
+        <Route path="/" component={Main} />
     );
 };
 

@@ -44,8 +44,7 @@ export class Main extends React.Component {
                     <Content style={{ margin: '24px', padding: 24, background: '#fff', minHeight: 280 }}>
                         <div style={{background: '#fff', padding: 24}}>
                             <Switch>
-                                <Route exact path="/main" render={() => <h1>Главная</h1>} />
-                                <Route path="/main/cinemas" component={Cinemas} />
+                                <Route path="/cinemas" component={Cinemas} />
                             </Switch>
                         </div>
                     </Content>

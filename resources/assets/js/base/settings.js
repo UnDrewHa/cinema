@@ -3,70 +3,65 @@ export const menu = {
     items: [
         {
             icon: '',
-            label: 'Главная',
-            link: '/main'
-        },
-        {
-            icon: '',
             label: 'Кинотеатры',
-            link: '/main/cinemas'
+            link: '/cinemas'
         },
         {
             icon: '',
             label: 'Залы',
-            link: '/main/halls'
+            link: '/halls'
         },
         {
             icon: '',
             label: 'Фильмы',
-            link: '/main/films',
+            link: '/films',
             items: [
                 {
                     icon: '',
                     label: 'Все фильмы',
-                    link: '/main/films'
+                    link: '/films'
                 },
                 {
                     icon: '',
                     label: 'Актеры',
-                    link: '/main/actors'
+                    link: '/actors'
                 },
                 {
                     icon: '',
                     label: 'Возр. ограничение',
-                    link: '/main/age-limits'
+                    link: '/age-limits'
                 },
                 {
                     icon: '',
                     label: 'Страны производства',
-                    link: '/main/countries'
+                    link: '/countries'
                 },
                 {
                     icon: '',
                     label: 'Режисеры',
-                    link: '/main/directors'
+                    link: '/directors'
                 },
                 {
                     icon: '',
                     label: 'Форматы',
-                    link: '/main/film-formats'
+                    link: '/film-formats'
                 },
                 {
                     icon: '',
                     label: 'Жанры',
-                    link: '/main/genres'
+                    link: '/genres'
                 }
             ]
         },
         {
             icon: '',
             label: 'Сеансы',
-            link: '/main/sessions'
+            link: '/sessions'
         },
         {
             icon: '',
             label: 'Лицензии',
-            link: '/main/licenses'
+            link: '/licenses'
         }
     ],
     mode: 'inline',
@@ -74,3 +69,18 @@ export const menu = {
 };
 
 export const common = {};
+
+export const modal = {
+    cinemas: {
+        CREATE: {
+            cancelText: 'Отмена',
+            okText: 'Добавить',
+            title: 'Добавить новый кинотеатр'
+        },
+        EDIT: {
+            cancelText: 'Отмена',
+            okText: 'Сохранить',
+            title: 'Изменить данные кинотеатра'
+        }
+    }
+}
