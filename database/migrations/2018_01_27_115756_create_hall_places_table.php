@@ -16,7 +16,6 @@ class CreateHallPlacesTable extends Migration
         Schema::create('hall_places', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('hall_id');
-            $table->integer('place_type_id');
             $table->integer('row');
             $table->integer('column');
             $table->boolean('is_active');

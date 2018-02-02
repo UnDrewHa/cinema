@@ -10,9 +10,5 @@ class HallPlace extends Model
         return $this->belongsTo(Hall::class);
     }
 
-    public function placeType() {
-        return $this->belongsTo(PlaceType::class);
-    }
-
     public $timestamps = false;
 }
