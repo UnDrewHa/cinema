@@ -16,7 +16,7 @@ class CountryController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|min:2'
+            'name' => 'required|unique:countries|min:2'
         ], [
             'required' => 'Поле обязательно для заполнения.',
             'min' => 'Минимальное количество символов - :min.'
@@ -41,7 +41,7 @@ class CountryController extends Controller
     public function update(Request $request, Country $country)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|min:2'
+            'name' => 'required|unique:countries|min:2'
         ], [
             'required' => 'Поле обязательно для заполнения.',
             'min' => 'Минимальное количество символов - :min.'
