@@ -20809,3 +20809,10 @@ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper:hover {
   opacity: .1;
 }
 
+.hall-scheme {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 16px;
+}
+

@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import { Form, Input, Select, Button, Spin, message  } from 'antd';
 const FormItem = Form.Item;
 import { HallsServices } from '../Services/HallsServices';
+import { HallScheme } from './HallScheme';
 
 class EditForm extends React.Component {
     state = {
@@ -65,7 +66,7 @@ class EditForm extends React.Component {
         const formItemLayout = {
             labelCol: {
                 xs: { span: 24 },
-                sm: { span: 3 },
+                sm: { span: 4 },
             },
             wrapperCol: {
                 xs: { span: 24 },
@@ -133,6 +134,9 @@ class EditForm extends React.Component {
                             )}
                         </Select>
                     )}
+                </FormItem>
+                <FormItem>
+                    <HallScheme />
                 </FormItem>
                 <FormItem>
                     <Link to='/halls'><Button>Назад</Button></Link>
