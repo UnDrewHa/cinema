@@ -35,11 +35,11 @@ export class Main extends React.Component {
                 </Sider>
                 <Layout>
                     <Header style={{ background: '#fff', padding: 0 }}>
-                        <Icon
-                            className="sider-trigger"
-                            type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
-                            onClick={this.handleToggleSidebar}
-                        />
+                        {/*<Icon*/}
+                            {/*className="sider-trigger"*/}
+                            {/*type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}*/}
+                            {/*onClick={this.handleToggleSidebar}*/}
+                        {/*/>*/}
                     </Header>
                     <Content style={{ margin: '24px', padding: 24, background: '#fff', minHeight: 280 }}>
                         <div style={{background: '#fff', padding: 24}}>

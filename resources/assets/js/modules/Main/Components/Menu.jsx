@@ -6,8 +6,10 @@ import { menu } from '../../../base/settings';
 function generateItem(item, index) {
     return (
         <Menu.Item key={index}>
-            {item.icon && <Icon type={item.icon} />}
-            <Link to={item.link}>{item.label}</Link>
+            <Link to={item.link}>
+                {item.icon && <Icon type={item.icon} />}
+                {item.label}
+                </Link>
         </Menu.Item>
     );
 }

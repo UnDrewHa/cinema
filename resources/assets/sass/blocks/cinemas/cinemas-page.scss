@@ -2,13 +2,24 @@
     .cinema-item {
         display: flex;
         flex-direction: column;
+        padding: 12px;
         .ant-card {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .ant-card-body {
             flex: 1;
         }
     }
 
     .cinema-add-item {
+        min-height: 200px;
         text-align: center;
+        .ant-btn-dashed {
+            display: flex;
+            flex: 1;
+        }
         .anticon {
             position: absolute;
             top: 50%;

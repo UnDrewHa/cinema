@@ -1,6 +1,7 @@
 import isNull from 'lodash/isNull';
+import mapValues from 'lodash/mapValues';
 import React from 'react';
-import { Modal, Button } from 'antd';
+import { Modal, Button, message } from 'antd';
 import { modal as modalTexts } from '../../../base/settings';
 import { CinemasEditForm } from './EditForm';
 
@@ -11,38 +12,28 @@ export class CinemaEditModal extends React.Component {
     
     editForm = null;
     
-    componentDidMount() {
-      const {cinema} = this.props;
-      if (cinema) {
-          this.editForm.setFields(cinema);
-          console.log(cinema);
-      }
-    };
-    
     handleOk = (values) => {
+        const {actions, cinema} = this.props;
+        const saveAction = cinema.id ? actions.update : actions.store;
+
         this.editForm.validateFields((err, values) => {
             if (!err) {
-                console.log(values);
+                saveAction({...cinema,...values})
+                    .then(this.props.onClose)
+                    .catch(this.props.onClose);
+    
+                this.editForm.resetFields();
             }
         });
-        
-        this.setState({
-            confirmLoading: true,
-        });
-        setTimeout(() => {
-            this.setState({
-                confirmLoading: false,
-            });
-        }, 2000);
     };
     
     handleCancel = () => {
         this.props.onClose();
+        this.editForm.resetFields();
     };
     
     render() {
-        const {confirmLoading, ModalText} = this.state;
-        const {type, visible} = this.props;
+        const {cinema, loading, type, visible} = this.props;
         const {title, cancelText, okText} = modalTexts.cinemas[type];
         const formItemLayout = {
             labelCol: {
@@ -62,16 +53,11 @@ export class CinemaEditModal extends React.Component {
                 okText={okText}
                 visible={visible}
                 onOk={this.handleOk}
-                confirmLoading={confirmLoading}
+                confirmLoading={loading}
                 onCancel={this.handleCancel}
             >
-                <CinemasEditForm ref={form => this.editForm = form} onFormSubmit={this.handleOk}/>
+                <CinemasEditForm ref={form => this.editForm = form} cinema={cinema} onFormSubmit={this.handleOk}/>
             </Modal>
         );
     }
 }
-
-// name
-// address
-// phone
-// description

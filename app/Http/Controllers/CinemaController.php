@@ -33,7 +33,7 @@ class CinemaController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json($validator->errors(), 500);
         }
 
         $newCinema = Cinema::create([
@@ -44,13 +44,13 @@ class CinemaController extends Controller
         ]);
         $newCinema->save();
 
-        return response()->json($newCinema);
+        return Cinema::all();
     }
 
     public function update(Request $request, Cinema $cinema)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'unique:cinemas|min:3|max:255',
+            'name' => 'min:3|max:255|unique:cinemas,name,'.$cinema->id,
             'address' => 'min:10',
             'phone' => 'min:10'
         ], [
@@ -67,13 +67,13 @@ class CinemaController extends Controller
 
         $cinema->save();
 
-        return response()->json($cinema);
+        return Cinema::all();
     }
 
     public function destroy(Cinema $cinema)
     {
         $cinema->delete();
 
-        return response()->json($cinema);
+        return Cinema::all();
     }
 }

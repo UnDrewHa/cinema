@@ -1,5 +1,5 @@
 export const menu = {
-    defaultSelectedKeys: ['1'],
+    defaultSelectedKeys: ['0'],
     items: [
         {
             icon: '',
@@ -83,4 +83,27 @@ export const modal = {
             title: 'Изменить данные кинотеатра'
         }
     }
-}
+};
+
+export const cinemas = {
+    STORE: {
+        success: 'Новый кинотеатр успешно добавлен.',
+        failure: 'Ошибка при добавлении кинотеатра.'
+    },
+    DESTROY: {
+        success: 'Кинотеатр удален.',
+        failure: 'Ошибка при удалении кинотеатра.'
+    },
+    UPDATE: {
+        success: 'Данные кинотеатра обновлены.',
+        failure: 'Ошибка при обновлении данных кинотеатра.'
+    },
+    LOAD: {
+        success: '',
+        failure: 'Ошибка при загрузке данных.'
+    },
+    LOAD_BY_ID: {
+        success: '',
+        failure: 'Ошибка при загрузке данных.'
+    }
+};

@@ -11,15 +11,13 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import { createLogger } from 'redux-logger'
-import { Layout } from 'antd';
-import { Auth } from './modules/Auth/Pages/Auth';
 import { Main } from './modules/Main/Pages/Main';
-import { AuthReducer } from './modules/Auth/Reducers/AuthReducers';
+import { rootReducer } from './base/rootReducer';
 
 const loggerMiddleware = createLogger();
 
 const store = createStore(
-    AuthReducer,
+    rootReducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
     applyMiddleware(
         thunkMiddleware,

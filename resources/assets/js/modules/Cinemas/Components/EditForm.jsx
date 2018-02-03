@@ -1,8 +1,28 @@
 import React from 'react';
 import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button } from 'antd';
+import mapValues from 'lodash/mapValues';
 const FormItem = Form.Item;
 
+function transformObjectToFields(obj) {
+    return mapValues(obj, (value) => ({
+        errors: [],
+        value
+    }));
+}
+
 class EditForm extends React.Component {
+    
+    componentDidMount() {
+        const {cinema, form} = this.props;
+        cinema && form.setFieldsValue(cinema);
+    };
+    
+    componentWillReceiveProps({cinema}) {
+        if (this.props.cinema.id !== cinema.id) {
+            this.props.form.setFieldsValue(cinema);
+        }
+    }
+    
     render() {
         const { getFieldDecorator } = this.props.form;
         
