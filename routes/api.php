@@ -22,7 +22,8 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 Route::apiResources([
     'cinema' => 'CinemaController',
-    'hall' => 'HallController'
+    'hall' => 'HallController',
+    'film-format' => 'FilmFormatController',
 ]);
 
 Route::delete('/hall', 'HallController@batchDelete');

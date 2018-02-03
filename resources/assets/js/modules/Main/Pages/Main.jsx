@@ -8,6 +8,7 @@ import { Layout, Menu, Icon } from 'antd';
 import { MainMenu } from '../Components/Menu';
 import { Cinemas } from '../../Cinemas/Pages/Cinemas';
 import { Halls } from '../../Halls/Pages/Halls';
+import { HallEdit } from '../../Halls/Pages/HallEdit';
 
 const {Header, Content, Footer, Sider} = Layout;
 
@@ -47,6 +48,8 @@ export class Main extends React.Component {
                             <Switch>
                                 <Route path="/cinemas" component={Cinemas} />
                                 <Route path="/halls" component={Halls} />
+                                <Route path="/hall/edit/:id" component={HallEdit} />
+                                <Route path="/hall/create" component={HallEdit} />
                             </Switch>
                         </div>
                     </Content>

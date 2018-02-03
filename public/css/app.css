@@ -13586,7 +13586,7 @@ input[type="checkbox"].disabled {
   transition: none;
 }
 .ant-form-item-label {
-  text-align: right;
+  text-align: left;
   vertical-align: middle;
   line-height: 39.9999px;
   display: inline-block;
@@ -18521,7 +18521,7 @@ a.ant-notification-notice-close:focus {
   float: right;
 }
 .ant-table-filter-dropdown {
-  min-width: 96px;
+  min-width: 130px;
   margin-left: -8px;
   background: #fff;
   border-radius: 4px;

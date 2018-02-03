@@ -4,6 +4,7 @@ import uniqBy from 'lodash/uniqBy';
 import values from 'lodash/values';
 import React from 'react';
 import { connect } from 'react-redux';
+import {Link} from 'react-router-dom';
 import { Table, Button, Spin, Divider, Popconfirm, Row  } from 'antd';
 import { HallsActions } from '../Actions/HallsActions';
 import { HallsServices } from '../Services/HallsServices';
@@ -93,7 +94,7 @@ class Halls extends React.Component {
             render: (item) => {
                 return (
                     <span>
-                <a href="#">Изменить</a>
+                <Link to={`/hall/edit/${item.id}`}>Изменить</Link>
                 <Divider type="vertical" />
                 <Popconfirm title="Удалить зал?" okText="Удалить" cancelText="Отмена" onConfirm={() => this.handleDelete(item)}>
                     <a>Удалить</a>
@@ -110,7 +111,9 @@ class Halls extends React.Component {
                         <Popconfirm title="Удалить выбранные залы?" okText="Удалить" cancelText="Отмена" onConfirm={() => this.handleBatchDelete}>
                             <Button type="danger" disabled={!hasSelected}>Удалить</Button>
                         </Popconfirm>
-                        <Button type="primary" style={{marginLeft: 8}}>Добавить</Button>
+                        <Link to="/hall/create">
+                            <Button type="primary" style={{marginLeft: 8}}>Добавить</Button>
+                        </Link>
                     </Row>
                     <Table
                         onChange={this.handleChange}

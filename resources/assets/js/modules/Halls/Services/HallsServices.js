@@ -11,6 +11,12 @@ export class HallsServices {
     loadById = (id) =>
         axios.get(`/api/hall/${id}`);
     
+    loadCinemas = () =>
+        axios.get('/api/cinema');
+    
+    loadFilmFormat = () =>
+        axios.get('/api/film-format');
+    
     store = (data) =>
         axios.post('/api/hall', data);
     

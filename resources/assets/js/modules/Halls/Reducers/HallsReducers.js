@@ -58,18 +58,15 @@ function listReducer(prevState, action) {
                     status: 3
                 }
             };
-        
-        default:
-            return prevState
     }
 }
 
 export function HallsReducer(prevState = initialState.halls, action) {
     switch (action.baseType) {
         case HALLS_ACTIONS.LOAD_BY_ID:
+        case HALLS_ACTIONS.UPDATE:
             return detailsReducer(prevState, action);
         case HALLS_ACTIONS.LOAD:
-        case HALLS_ACTIONS.UPDATE:
         case HALLS_ACTIONS.DESTROY:
         case HALLS_ACTIONS.BATCH_DELETE:
             return listReducer(prevState, action);

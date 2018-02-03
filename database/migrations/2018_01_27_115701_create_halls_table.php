@@ -18,7 +18,7 @@ class CreateHallsTable extends Migration
             $table->integer('cinema_id');
             $table->integer('film_format_id');
             $table->string('name');
-            $table->integer('place_count');
+            $table->string('place_count');
 //            $table->timestamps();
         });
     }

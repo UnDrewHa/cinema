@@ -32,11 +32,11 @@ class HallController extends Controller
         $newHall = Hall::create([
             'name' => request('name'),
             'place_count' => request('place_count'),
-            'cinema_id' => request('cinemaId'),
-            'film_format_id' => request('filmFormatId')
+            'cinema_id' => request('cinema_id'),
+            'film_format_id' => request('film_format_id')
         ]);
 
-        return response()->json($newHall);
+        return Hall::with(['cinema:id,name', 'filmFormat'])->get()->all();
     }
 
     public function show(Hall $hall)
@@ -62,7 +62,9 @@ class HallController extends Controller
 
         $hall->fill($request->all());
 
-        return response()->json($hall);
+        $hall->save();
+
+        return Hall::with(['cinema:id,name', 'filmFormat'])->get()->all();
     }
 
     public function destroy(Hall $hall)

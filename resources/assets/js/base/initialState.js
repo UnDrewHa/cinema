@@ -1,16 +1,16 @@
 export const initialState = {
     cinemas: {
         data: null,
-        status: 0
+        status: 2
     },
     halls: {
         details: {
-            data: null,
-            status: 0
+            data: {},
+            status: 2
         },
         list: {
             data: null,
-            status: 0
+            status: 2
         }
     }
 };
