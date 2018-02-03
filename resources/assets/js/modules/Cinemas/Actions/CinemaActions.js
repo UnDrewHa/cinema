@@ -22,6 +22,4 @@ export class CinemaActions {
     
     destroy = (id) =>
         createAsyncAction(this.dispatch, this.services.destroy, id, CINEMA_ACTIONS.DESTROY, cinemas);
-    
-    
 }

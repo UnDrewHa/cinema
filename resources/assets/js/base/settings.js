@@ -86,23 +86,50 @@ export const modal = {
 };
 
 export const cinemas = {
-    STORE: {
+    CINEMAS_STORE: {
         success: 'Новый кинотеатр успешно добавлен.',
         failure: 'Ошибка при добавлении кинотеатра.'
     },
-    DESTROY: {
+    CINEMAS_DESTROY: {
         success: 'Кинотеатр удален.',
         failure: 'Ошибка при удалении кинотеатра.'
     },
-    UPDATE: {
+    CINEMAS_UPDATE: {
         success: 'Данные кинотеатра обновлены.',
         failure: 'Ошибка при обновлении данных кинотеатра.'
     },
-    LOAD: {
+    CINEMAS_LOAD: {
         success: '',
         failure: 'Ошибка при загрузке данных.'
     },
-    LOAD_BY_ID: {
+    CINEMAS_LOAD_BY_ID: {
+        success: '',
+        failure: 'Ошибка при загрузке данных.'
+    }
+};
+
+export const halls = {
+    HALLS_STORE: {
+        success: 'Новый зал успешно добавлен.',
+        failure: 'Ошибка при добавлении зала.'
+    },
+    HALLS_DESTROY: {
+        success: 'Зал удален.',
+        failure: 'Ошибка при удалении зала.'
+    },
+    HALLS_BATCH_DELETE: {
+        success: 'Залы удалены.',
+        failure: 'Ошибка при удалении залов.'
+    },
+    HALLS_UPDATE: {
+        success: 'Данные зала обновлены.',
+        failure: 'Ошибка при обновлении данных зала.'
+    },
+    HALLS_LOAD: {
+        success: '',
+        failure: 'Ошибка при загрузке данных.'
+    },
+    HALLS_LOAD_BY_ID: {
         success: '',
         failure: 'Ошибка при загрузке данных.'
     }

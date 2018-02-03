@@ -24,3 +24,5 @@ Route::apiResources([
     'cinema' => 'CinemaController',
     'hall' => 'HallController'
 ]);
+
+Route::delete('/hall', 'HallController@batchDelete');

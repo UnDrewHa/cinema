@@ -22,6 +22,6 @@ export function createAsyncAction(dispatch, asyncCall, payload, action, translat
                 type: action + FAILURE,
                 payload: payload.data
             });
-            translation[action].failure && message.success(translation[action].failure);
+            translation[action].failure && message.error(translation[action].failure);
         });
 }

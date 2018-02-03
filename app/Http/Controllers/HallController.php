@@ -10,7 +10,7 @@ class HallController extends Controller
 {
     public function index()
     {
-        return Hall::all();
+        return Hall::with(['cinema:id,name', 'filmFormat'])->get()->all();
     }
 
     public function store(Request $request)
@@ -69,6 +69,13 @@ class HallController extends Controller
     {
         $hall->delete();
 
-        return response()->json($hall);
+        return Hall::with(['cinema:id,name', 'filmFormat'])->get()->all();
+    }
+
+    public function batchDelete(Request $request)
+    {
+        Hall::destroy($request->halls);
+
+        return Hall::with(['cinema:id,name', 'filmFormat'])->get()->all();
     }
 }

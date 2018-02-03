@@ -7,6 +7,7 @@ import {
 import { Layout, Menu, Icon } from 'antd';
 import { MainMenu } from '../Components/Menu';
 import { Cinemas } from '../../Cinemas/Pages/Cinemas';
+import { Halls } from '../../Halls/Pages/Halls';
 
 const {Header, Content, Footer, Sider} = Layout;
 
@@ -41,10 +42,11 @@ export class Main extends React.Component {
                             {/*onClick={this.handleToggleSidebar}*/}
                         {/*/>*/}
                     </Header>
-                    <Content style={{ margin: '24px', padding: 24, background: '#fff', minHeight: 280 }}>
+                    <Content style={{ margin: '24px', padding: 24, background: '#fff' }}>
                         <div style={{background: '#fff', padding: 24}}>
                             <Switch>
                                 <Route path="/cinemas" component={Cinemas} />
+                                <Route path="/halls" component={Halls} />
                             </Switch>
                         </div>
                     </Content>

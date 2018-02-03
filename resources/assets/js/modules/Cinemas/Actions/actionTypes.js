@@ -1,7 +1,9 @@
+const PREFIX = 'CINEMAS_';
+
 export const CINEMA_ACTIONS = {
-    STORE: 'STORE',
-    DESTROY: 'DESTROY',
-    UPDATE:'UPDATE',
-    LOAD: 'LOAD',
-    LOAD_BY_ID: 'LOAD_BY_ID'
+    STORE: PREFIX + 'STORE',
+    DESTROY: PREFIX + 'DESTROY',
+    UPDATE: PREFIX + 'UPDATE',
+    LOAD: PREFIX + 'LOAD',
+    LOAD_BY_ID: PREFIX + 'LOAD_BY_ID'
 };
