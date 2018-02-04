@@ -32,7 +32,7 @@ export class HallScheme extends React.Component {
     };
     
     render() {
-        const {scheme: {row, col, scheme}, children} = this.props;
+        const {scheme: {row, column, scheme}, children} = this.props;
         return (
             <Row type="flex">
                 <Col span={24}>
@@ -42,7 +42,7 @@ export class HallScheme extends React.Component {
                     <InputNumber placeholder="Строк" value={row} onChange={this.handleRowChange} min={0} max={MAX_ROW_NUM} />
                 </Col>
                 <Col span={2}>
-                    <InputNumber placeholder="Колонок" value={col} onChange={this.handleColChange} min={0} max={MAX_COL_NUM} />
+                    <InputNumber placeholder="Колонок" value={column} onChange={this.handleColChange} min={0} max={MAX_COL_NUM} />
                 </Col>
                 <Col span={24} className='hall-scheme'>
                     {children && (

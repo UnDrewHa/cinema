@@ -18,7 +18,7 @@ function schemeToOb(scheme) {
 
 function transformScheme(scheme) {
     return {
-        col: maxBy(scheme, 'column').column,
+        column: maxBy(scheme, 'column').column,
         row: maxBy(scheme, 'row').row,
         scheme: schemeToOb(scheme)
     }
@@ -31,7 +31,7 @@ class EditForm extends React.Component {
         cinemas: {},
         filmFormats: {},
         scheme: {
-            col: 0,
+            column: 0,
             row: 0,
             scheme: {}
         },
@@ -69,23 +69,23 @@ class EditForm extends React.Component {
     componentWillReceiveProps({hallsData}) {
         if (this.props.hallsData.id !== hallsData.id) {
             this.props.form.setFieldsValue(hallsData);
-            hallsData.places.length > 0 && this.setState({
+            hallsData.places && hallsData.places.length > 0 && this.setState({
                 scheme: transformScheme(hallsData.places)
             }, this.recalculateScheme);
         }
     }
     
     recalculateScheme = () => {
-        const {col, row, scheme} = this.state.scheme;
-        scheme && this.parseScheme(row, col, scheme);
+        const {column, row, scheme} = this.state.scheme;
+        scheme && this.parseScheme(row, column, scheme);
     };
     
-    parseScheme = (row, col, scheme) => {
+    parseScheme = (row, column, scheme) => {
         let checkboxes = [];
         let newScheme = {...scheme};
         
         for (let r = 0; r < row; r++) {
-            for (let c = 0; c < col; c++) {
+            for (let c = 0; c < column; c++) {
                 const checked = scheme[`${r+1}-${c+1}`] ? !!scheme[`${r+1}-${c+1}`].is_active : true;
                 checkboxes.push(<Checkbox
                     onChange={this.handleCheck}
@@ -96,7 +96,7 @@ class EditForm extends React.Component {
                 if (!newScheme.hasOwnProperty(`${r+1}-${c+1}`)) {
                     newScheme[`${r+1}-${c+1}`] = {
                         row: r+1,
-                        col: c+1,
+                        column: c+1,
                         is_active: checked
                     };
                 }
@@ -108,7 +108,7 @@ class EditForm extends React.Component {
             scheme: {
                 scheme: newScheme,
                 row,
-                col
+                column
             },
             checkboxes
         }));
@@ -127,7 +127,7 @@ class EditForm extends React.Component {
         this.setState(prevState => ({
             scheme: {
                 ...prevState.scheme,
-                col: num
+                column: num
             }
         }), this.recalculateScheme);
     };
@@ -153,8 +153,8 @@ class EditForm extends React.Component {
         e.preventDefault();
         const {actions, hallsData, history, form} = this.props;
         const saveAction = hallsData.id ? actions.update : actions.store;
-        const scheme = values(this.scheme.state.dbScheme);
-    
+        const scheme = values(this.state.scheme.scheme);
+        
         form.validateFields((err, values) => {
             if (!err) {
                 saveAction({

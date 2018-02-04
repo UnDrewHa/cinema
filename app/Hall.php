@@ -25,4 +25,5 @@ class Hall extends Model
     public $timestamps = false;
 
     public $guarded = [];
+    protected $fillable = ['name', 'place_count', 'cinema_id', 'film_format_id'];
 }

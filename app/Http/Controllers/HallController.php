@@ -33,10 +33,6 @@ class HallController extends Controller
 
 
         DB::transaction(function () {
-            $func = function($value) {
-
-            };
-
             $newHall = Hall::create([
                 'name' => request('name'),
                 'place_count' => request('place_count'),
@@ -58,7 +54,6 @@ class HallController extends Controller
 
     public function show(Hall $hall)
     {
-        $data = $hall->load('places');
         return response()->json($hall->load('places'));
     }
 
@@ -78,9 +73,21 @@ class HallController extends Controller
             return response()->json($validator->errors());
         }
 
-        $hall->fill($request->all());
+        DB::transaction(function () use($hall, $request) {
+            $hall->fill($request->all());
 
-        $hall->save();
+            $hall->save();
+
+            if (count(request('scheme')) > 0) {
+                HallPlace::where('hall_id', '=', $hall->id)->delete();
+
+                $hall->places()->saveMany(
+                    array_map(function($item) {
+                        return new HallPlace($item);
+                    }, request('scheme'))
+                );
+            }
+        });
 
         return Hall::with(['cinema:id,name', 'filmFormat'])->get()->all();
     }
