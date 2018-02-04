@@ -11,4 +11,6 @@ class HallPlace extends Model
     }
 
     public $timestamps = false;
+
+    public $guarded = [];
 }

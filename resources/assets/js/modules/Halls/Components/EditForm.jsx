@@ -1,19 +1,46 @@
+import values from 'lodash/values';
+import maxBy from 'lodash/maxBy';
 import React from 'react';
 import {Link} from 'react-router-dom';
-import { Form, Input, Select, Button, Spin, message  } from 'antd';
+import { Form, Input, Select, Button, Spin, message, Checkbox  } from 'antd';
 const FormItem = Form.Item;
 import { HallsServices } from '../Services/HallsServices';
 import { HallScheme } from './HallScheme';
+
+function schemeToOb(scheme) {
+    let obj = {};
+    scheme.forEach((item) => {
+        obj[`${item.row}-${item.column}`] = item;
+    });
+    
+    return obj;
+}
+
+function transformScheme(scheme) {
+    return {
+        col: maxBy(scheme, 'column').column,
+        row: maxBy(scheme, 'row').row,
+        scheme: schemeToOb(scheme)
+    }
+}
 
 class EditForm extends React.Component {
     state = {
         cinemasLoading: true,
         filmFormatLoading: true,
         cinemas: {},
-        filmFormats: {}
+        filmFormats: {},
+        scheme: {
+            col: 0,
+            row: 0,
+            scheme: {}
+        },
+        checkboxes: []
     };
 
     services = new HallsServices();
+    
+    scheme = null;
     
     componentDidMount() {
         const {actions, hallsData, match: {params}} = this.props;
@@ -42,25 +69,105 @@ class EditForm extends React.Component {
     componentWillReceiveProps({hallsData}) {
         if (this.props.hallsData.id !== hallsData.id) {
             this.props.form.setFieldsValue(hallsData);
+            hallsData.places.length > 0 && this.setState({
+                scheme: transformScheme(hallsData.places)
+            }, this.recalculateScheme);
         }
     }
+    
+    recalculateScheme = () => {
+        const {col, row, scheme} = this.state.scheme;
+        scheme && this.parseScheme(row, col, scheme);
+    };
+    
+    parseScheme = (row, col, scheme) => {
+        let checkboxes = [];
+        let newScheme = {...scheme};
+        
+        for (let r = 0; r < row; r++) {
+            for (let c = 0; c < col; c++) {
+                const checked = scheme[`${r+1}-${c+1}`] ? !!scheme[`${r+1}-${c+1}`].is_active : true;
+                checkboxes.push(<Checkbox
+                    onChange={this.handleCheck}
+                    checked={checked}
+                    key={`${r+1}-${c+1}`}
+                    data-id={`${r+1}-${c+1}`}/>);
+
+                if (!newScheme.hasOwnProperty(`${r+1}-${c+1}`)) {
+                    newScheme[`${r+1}-${c+1}`] = {
+                        row: r+1,
+                        col: c+1,
+                        is_active: checked
+                    };
+                }
+            }
+            checkboxes.push(<br key={r+100} />);
+        }
+        
+        this.setState(prevState => ({
+            scheme: {
+                scheme: newScheme,
+                row,
+                col
+            },
+            checkboxes
+        }));
+    };
+    
+    handleRowChange = (num) => {
+        this.setState(prevState => ({
+            scheme: {
+                ...prevState.scheme,
+                row: num
+            }
+        }), this.recalculateScheme);
+    };
+    
+    handleColChange = (num) => {
+        this.setState(prevState => ({
+            scheme: {
+                ...prevState.scheme,
+                col: num
+            }
+        }), this.recalculateScheme);
+    };
+    
+    handleCheck = (e) => {
+        console.log(e);
+        const id = e.target['data-id'];
+        this.setState(prevState => ({
+            scheme: {
+                ...prevState.scheme,
+                scheme: {
+                    ...prevState.scheme.scheme,
+                    [id]: {
+                        ...prevState.scheme.scheme[id],
+                        is_active: +e.target.checked
+                    }
+                }
+            }
+        }), this.recalculateScheme);
+    };
     
     handleSubmit = (e) => {
         e.preventDefault();
         const {actions, hallsData, history, form} = this.props;
         const saveAction = hallsData.id ? actions.update : actions.store;
+        const scheme = values(this.scheme.state.dbScheme);
     
         form.validateFields((err, values) => {
             if (!err) {
-                saveAction({...hallsData,...values})
-                    .then(() => history.replace('/halls'))
-                
+                saveAction({
+                    ...hallsData,
+                    ...values,
+                    scheme
+                }).then(() => history.replace('/halls'))
             }
         });
     };
     
     render() {
-        const { getFieldDecorator } = this.props.form;
+        const { hallsData, form: {getFieldDecorator} } = this.props;
         const {cinemas, cinemasLoading, filmFormats, filmFormatLoading} = this.state;
         
         const formItemLayout = {
@@ -136,7 +243,14 @@ class EditForm extends React.Component {
                     )}
                 </FormItem>
                 <FormItem>
-                    <HallScheme />
+                    <HallScheme
+                        ref={scheme => this.scheme = scheme}
+                        scheme={this.state.scheme}
+                        onColChange={(num) => this.handleColChange(num)}
+                        onRowChange={(num) => this.handleRowChange(num)}
+                        onCheck={(id, checked) => this.handleCheck(id, checked)}>
+                        {this.state.checkboxes}
+                    </HallScheme>
                 </FormItem>
                 <FormItem>
                     <Link to='/halls'><Button>Назад</Button></Link>

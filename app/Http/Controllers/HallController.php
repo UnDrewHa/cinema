@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Validator;
 use App\Hall;
+use App\HallPlace;
 use Illuminate\Http\Request;
 
 class HallController extends Controller
 {
     public function index()
     {
-        return Hall::with(['cinema:id,name', 'filmFormat'])->get()->all();
+        return Hall::with(['cinema:id,name', 'filmFormat', 'places'])->get()->all();
     }
 
     public function store(Request $request)
@@ -29,19 +31,35 @@ class HallController extends Controller
             return response()->json($validator->errors());
         }
 
-        $newHall = Hall::create([
-            'name' => request('name'),
-            'place_count' => request('place_count'),
-            'cinema_id' => request('cinema_id'),
-            'film_format_id' => request('film_format_id')
-        ]);
+
+        DB::transaction(function () {
+            $func = function($value) {
+
+            };
+
+            $newHall = Hall::create([
+                'name' => request('name'),
+                'place_count' => request('place_count'),
+                'cinema_id' => request('cinema_id'),
+                'film_format_id' => request('film_format_id')
+            ]);
+
+            if (count(request('scheme')) > 0) {
+                $newHall->places()->saveMany(
+                    array_map(function($item) {
+                        return new HallPlace($item);
+                        }, request('scheme'))
+                );
+            }
+        });
 
         return Hall::with(['cinema:id,name', 'filmFormat'])->get()->all();
     }
 
     public function show(Hall $hall)
     {
-        return response()->json($hall);
+        $data = $hall->load('places');
+        return response()->json($hall->load('places'));
     }
 
     public function update(Request $request, Hall $hall)
