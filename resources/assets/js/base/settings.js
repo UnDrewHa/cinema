@@ -33,7 +33,7 @@ export const menu = {
                 },
                 {
                     icon: '',
-                    label: 'Страны производства',
+                    label: 'Страна производства',
                     link: '/countries'
                 },
                 {
@@ -93,6 +93,42 @@ export const modal = {
             cancelText: 'Отмена',
             okText: 'Сохранить',
             title: 'Изменить данные кинотеатра'
+        }
+    },
+    countries: {
+        CREATE: {
+            cancelText: 'Отмена',
+            okText: 'Добавить',
+            title: 'Добавить новую страну'
+        },
+        EDIT: {
+            cancelText: 'Отмена',
+            okText: 'Сохранить',
+            title: 'Изменить данные страны'
+        }
+    },
+    filmFormats: {
+        CREATE: {
+            cancelText: 'Отмена',
+            okText: 'Добавить',
+            title: 'Добавить новый формат'
+        },
+        EDIT: {
+            cancelText: 'Отмена',
+            okText: 'Сохранить',
+            title: 'Изменить данные формата'
+        }
+    },
+    ageLimits: {
+        CREATE: {
+            cancelText: 'Отмена',
+            okText: 'Добавить',
+            title: 'Добавить новую запись'
+        },
+        EDIT: {
+            cancelText: 'Отмена',
+            okText: 'Сохранить',
+            title: 'Изменить данные'
         }
     },
     directors: {
@@ -247,6 +283,87 @@ export const genres = {
         failure: 'Ошибка при загрузке данных.'
     },
     GENRES_LOAD_BY_ID: {
+        success: '',
+        failure: 'Ошибка при загрузке данных.'
+    }
+};
+
+export const countries = {
+    COUNTRIES_STORE: {
+        success: 'Новая страна успешно добавлен.',
+        failure: 'Ошибка при добавлении страны.'
+    },
+    COUNTRIES_DESTROY: {
+        success: 'Страна удалена.',
+        failure: 'Ошибка при удалении страны.'
+    },
+    COUNTRIES_BATCH_DELETE: {
+        success: 'Страны удалены.',
+        failure: 'Ошибка при удалении стран.'
+    },
+    COUNTRIES_UPDATE: {
+        success: 'Данные страны обновлены.',
+        failure: 'Ошибка при обновлении данных страны.'
+    },
+    COUNTRIES_LOAD: {
+        success: '',
+        failure: 'Ошибка при загрузке данных.'
+    },
+    COUNTRIES_LOAD_BY_ID: {
+        success: '',
+        failure: 'Ошибка при загрузке данных.'
+    }
+};
+
+export const filmFormats = {
+    FILM_FORMATS_STORE: {
+        success: 'Новый формат успешно добавлен.',
+        failure: 'Ошибка при добавлении формата.'
+    },
+    FILM_FORMATS_DESTROY: {
+        success: 'Формат удален.',
+        failure: 'Ошибка при удалении формата.'
+    },
+    FILM_FORMATS_BATCH_DELETE: {
+        success: 'Форматы удалены.',
+        failure: 'Ошибка при удалении форматов.'
+    },
+    FILM_FORMATS_UPDATE: {
+        success: 'Данные формата обновлены.',
+        failure: 'Ошибка при обновлении данных формата.'
+    },
+    FILM_FORMATS_LOAD: {
+        success: '',
+        failure: 'Ошибка при загрузке данных.'
+    },
+    FILM_FORMATS_LOAD_BY_ID: {
+        success: '',
+        failure: 'Ошибка при загрузке данных.'
+    }
+};
+
+export const ageLimits = {
+    AGE_LIMITS_STORE: {
+        success: 'Успешно добавлен.',
+        failure: 'Ошибка при добавлении.'
+    },
+    AGE_LIMITS_DESTROY: {
+        success: 'Удален.',
+        failure: 'Ошибка при удалении.'
+    },
+    AGE_LIMITS_BATCH_DELETE: {
+        success: 'Удалены.',
+        failure: 'Ошибка при удалении.'
+    },
+    AGE_LIMITS_UPDATE: {
+        success: 'Данные обновлены.',
+        failure: 'Ошибка при обновлении данных.'
+    },
+    AGE_LIMITS_LOAD: {
+        success: '',
+        failure: 'Ошибка при загрузке данных.'
+    },
+    AGE_LIMITS_LOAD_BY_ID: {
         success: '',
         failure: 'Ошибка при загрузке данных.'
     }

@@ -30,7 +30,7 @@ class FilmFormatController extends Controller
             'name' => request('name')
         ]);
 
-        return response()->json($filmFormat);
+        return FilmFormat::all();
     }
 
     public function show(FilmFormat $filmFormat)
@@ -52,14 +52,22 @@ class FilmFormatController extends Controller
         }
 
         $filmFormat->fill($request->all());
+        $filmFormat->save();
 
-        return response()->json($filmFormat);
+        return FilmFormat::all();
     }
 
     public function destroy(FilmFormat $filmFormat)
     {
         $filmFormat->delete();
 
-        return response()->json($filmFormat);
+        return FilmFormat::all();
+    }
+
+    public function batchDelete(Request $request)
+    {
+        FilmFormat::destroy($request->filmFormats);
+
+        return FilmFormat::all();
     }
 }

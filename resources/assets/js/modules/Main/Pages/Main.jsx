@@ -12,6 +12,9 @@ import { HallEdit } from '../../Halls/Pages/HallEdit';
 import { Actors } from '../../Actors/Pages/Actors';
 import { Directors } from '../../Directors/Pages/Directors';
 import { Genres } from '../../Genres/Pages/Genres';
+import { Countries } from '../../Countries/Pages/Countries';
+import { FilmFormats } from '../../FilmFormats/Pages/FilmFormats';
+import { AgeLimits } from '../../AgeLimits/Pages/AgeLimits';
 
 const {Header, Content, Footer, Sider} = Layout;
 
@@ -56,6 +59,9 @@ export class Main extends React.Component {
                                 <Route path="/actors" component={Actors} />
                                 <Route path="/directors" component={Directors} />
                                 <Route path="/genres" component={Genres} />
+                                <Route path="/countries" component={Countries} />
+                                <Route path="/film-formats" component={FilmFormats} />
+                                <Route path="/age-limits" component={AgeLimits} />
                             </Switch>
                         </div>
                     </Content>

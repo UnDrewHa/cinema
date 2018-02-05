@@ -7,6 +7,18 @@ export const initialState = {
         data: null,
         status: 2
     },
+    countries: {
+        data: null,
+        status: 2
+    },
+    filmFormats: {
+        data: null,
+        status: 2
+    },
+    ageLimits: {
+        data: null,
+        status: 2
+    },
     directors: {
         data: null,
         status: 2

@@ -30,7 +30,7 @@ class AgeLimitController extends Controller
             'name' => request('name')
         ]);
 
-        return response()->json($ageLimit);
+        return AgeLimit::all();
     }
 
     public function show(AgeLimit $ageLimit)
@@ -52,14 +52,22 @@ class AgeLimitController extends Controller
         }
 
         $ageLimit->fill($request->all());
+        $ageLimit->save();
 
-        return response()->json($ageLimit);
+        return AgeLimit::all();
     }
 
     public function destroy(AgeLimit $ageLimit)
     {
         $ageLimit->delete();
 
-        return response()->json($ageLimit);
+        return AgeLimit::all();
+    }
+
+    public function batchDelete(Request $request)
+    {
+        AgeLimit::destroy($request->ageLimits);
+
+        return AgeLimit::all();
     }
 }

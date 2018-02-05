@@ -27,9 +27,14 @@ Route::apiResources([
     'actor' => 'ActorController',
     'director' => 'DirectorController',
     'genre' => 'GenreController',
+    'country' => 'CountryController',
+    'age-limit' => 'AgeLimitController',
 ]);
 
 Route::delete('/hall', 'HallController@batchDelete');
 Route::delete('/actor', 'ActorController@batchDelete');
 Route::delete('/director', 'DirectorController@batchDelete');
 Route::delete('/genre', 'GenreController@batchDelete');
+Route::delete('/country', 'CountryController@batchDelete');
+Route::delete('/film-format', 'FilmFormatController@batchDelete');
+Route::delete('/age-limit', 'AgeLimitController@batchDelete');

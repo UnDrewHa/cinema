@@ -16,7 +16,7 @@ class CountryController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:countries|min:2'
+            'name' => 'required|unique:countries'
         ], [
             'required' => 'Поле обязательно для заполнения.',
             'min' => 'Минимальное количество символов - :min.'
@@ -30,7 +30,7 @@ class CountryController extends Controller
             'name' => request('name')
         ]);
 
-        return response()->json($country);
+        return Country::all();
     }
 
     public function show(Country $country)
@@ -52,14 +52,22 @@ class CountryController extends Controller
         }
 
         $country->fill($request->all());
+        $country->save();
 
-        return response()->json($country);
+        return Country::all();
     }
 
     public function destroy(Country $country)
     {
         $country->delete();
 
-        return response()->json($country);
+        return Country::all();
+    }
+
+    public function batchDelete(Request $request)
+    {
+        Country::destroy($request->countries);
+
+        return Country::all();
     }
 }
