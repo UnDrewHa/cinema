@@ -16,7 +16,7 @@ class DirectorController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:directors|min:2'
+            'name' => 'required|unique:directors'
         ], [
             'required' => 'Поле обязательно для заполнения.',
             'min' => 'Минимальное количество символов - :min.'
@@ -30,7 +30,7 @@ class DirectorController extends Controller
             'name' => request('name')
         ]);
 
-        return response()->json($director);
+        return Director::all();
     }
 
     public function show(Director $director)
@@ -41,7 +41,7 @@ class DirectorController extends Controller
     public function update(Request $request, Director $director)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:directors|min:2'
+            'name' => 'required|unique:directors,name,'.$director->id
         ], [
             'required' => 'Поле обязательно для заполнения.',
             'min' => 'Минимальное количество символов - :min.'
@@ -52,14 +52,22 @@ class DirectorController extends Controller
         }
 
         $director->fill($request->all());
+        $director->save();
 
-        return response()->json($director);
+        return Director::all();
     }
 
     public function destroy(Director $director)
     {
         $director->delete();
 
-        return response()->json($director);
+        return Director::all();
+    }
+
+    public function batchDelete(Request $request)
+    {
+        Director::destroy($request->directors);
+
+        return Director::all();
     }
 }

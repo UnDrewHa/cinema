@@ -1,29 +1,15 @@
-import includes from 'lodash/includes';
 import { initialState } from '../../../base/initialState';
-import { createAsyncReducer } from '../../../base/createAsyncReducer';
-import { BEGIN, SUCCESS, FAILURE } from '../../../base/actionTypes'
+import { baseReducer } from '../../../base/reducerHelpers';
+import {CINEMA_ACTIONS} from '../Actions/actionTypes';
 
 export function CinemaReducer(prevState = initialState.cinemas, action) {
-    if (!includes(action.type, 'CINEMAS_')) {
-        return prevState;
-    }
-    switch (action.type) {
-        case action.baseType + BEGIN:
-            return {
-                ...prevState,
-                status: 1
-            };
-        case action.baseType + SUCCESS:
-            return {
-                data: action.payload,
-                status: 2
-            };
-        case action.baseType + FAILURE:
-            return {
-                ...prevState,
-                status: 3
-            };
-        
+    switch (action.baseType) {
+        case CINEMA_ACTIONS.LOAD:
+        case CINEMA_ACTIONS.LOAD_BY_ID:
+        case CINEMA_ACTIONS.STORE:
+        case CINEMA_ACTIONS.DESTROY:
+        case CINEMA_ACTIONS.UPDATE:
+            return baseReducer(prevState, action);
         default:
             return prevState
     }

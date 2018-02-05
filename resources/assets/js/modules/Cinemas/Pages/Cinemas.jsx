@@ -33,7 +33,6 @@ class Cinemas extends React.Component {
         this.setState({
             modalType: 'CREATE',
             modalVisible: true,
-            
         });
     };
     

@@ -24,6 +24,12 @@ Route::apiResources([
     'cinema' => 'CinemaController',
     'hall' => 'HallController',
     'film-format' => 'FilmFormatController',
+    'actor' => 'ActorController',
+    'director' => 'DirectorController',
+    'genre' => 'GenreController',
 ]);
 
 Route::delete('/hall', 'HallController@batchDelete');
+Route::delete('/actor', 'ActorController@batchDelete');
+Route::delete('/director', 'DirectorController@batchDelete');
+Route::delete('/genre', 'GenreController@batchDelete');

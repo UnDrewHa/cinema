@@ -9,6 +9,9 @@ import { MainMenu } from '../Components/Menu';
 import { Cinemas } from '../../Cinemas/Pages/Cinemas';
 import { Halls } from '../../Halls/Pages/Halls';
 import { HallEdit } from '../../Halls/Pages/HallEdit';
+import { Actors } from '../../Actors/Pages/Actors';
+import { Directors } from '../../Directors/Pages/Directors';
+import { Genres } from '../../Genres/Pages/Genres';
 
 const {Header, Content, Footer, Sider} = Layout;
 
@@ -50,6 +53,9 @@ export class Main extends React.Component {
                                 <Route path="/halls" component={Halls} />
                                 <Route path="/hall/edit/:id" component={HallEdit} />
                                 <Route path="/hall/create" component={HallEdit} />
+                                <Route path="/actors" component={Actors} />
+                                <Route path="/directors" component={Directors} />
+                                <Route path="/genres" component={Genres} />
                             </Switch>
                         </div>
                     </Content>

@@ -16,7 +16,7 @@ class GenreController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:genres|min:2'
+            'name' => 'required|unique:genres'
         ], [
             'required' => 'Поле обязательно для заполнения.',
             'min' => 'Минимальное количество символов - :min.'
@@ -30,7 +30,7 @@ class GenreController extends Controller
             'name' => request('name')
         ]);
 
-        return response()->json($genre);
+        return Genre::all();
     }
 
     public function show(Genre $genre)
@@ -41,7 +41,7 @@ class GenreController extends Controller
     public function update(Request $request, Genre $genre)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:genres|min:2'
+            'name' => 'required|unique:genres,name,'.$genre->id
         ], [
             'required' => 'Поле обязательно для заполнения.',
             'min' => 'Минимальное количество символов - :min.'
@@ -52,14 +52,22 @@ class GenreController extends Controller
         }
 
         $genre->fill($request->all());
+        $genre->save();
 
-        return response()->json($genre);
+        return Genre::all();
     }
 
     public function destroy(Genre $genre)
     {
         $genre->delete();
 
-        return response()->json($genre);
+        return Genre::all();
+    }
+
+    public function batchDelete(Request $request)
+    {
+        Genre::destroy($request->genres);
+
+        return Genre::all();
     }
 }

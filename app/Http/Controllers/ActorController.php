@@ -16,7 +16,7 @@ class ActorController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:actors|min:2'
+            'name' => 'required|unique:actors'
         ], [
             'required' => 'Поле обязательно для заполнения.',
             'min' => 'Минимальное количество символов - :min.'
@@ -30,7 +30,7 @@ class ActorController extends Controller
             'name' => request('name')
         ]);
 
-        return response()->json($actor);
+        return Actor::all();
     }
 
     public function show(Actor $actor)
@@ -41,7 +41,7 @@ class ActorController extends Controller
     public function update(Request $request, Actor $actor)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:actors|min:2'
+            'name' => 'required|unique:actors,name,'.$actor->id
         ], [
             'required' => 'Поле обязательно для заполнения.',
             'min' => 'Минимальное количество символов - :min.'
@@ -52,14 +52,22 @@ class ActorController extends Controller
         }
 
         $actor->fill($request->all());
+        $actor->save();
 
-        return response()->json($actor);
+        return Actor::all();
     }
 
     public function destroy(Actor $actor)
     {
         $actor->delete();
 
-        return response()->json($actor);
+        return Actor::all();
+    }
+
+    public function batchDelete(Request $request)
+    {
+        Actor::destroy($request->actors);
+
+        return Actor::all();
     }
 }

@@ -52,7 +52,7 @@ class Halls extends React.Component {
     handleBatchDelete = () => {
         this.props.actions.batchDelete({
             halls: values(this.state.selectedRowKeys)
-        });
+        }).then(() => this.setState({selectedRowKeys: []}));
     };
     
     handleDelete = ({id}) => {
@@ -108,7 +108,7 @@ class Halls extends React.Component {
                 <div className="halls-page">
                     <h1>Залы</h1>
                     <Row type="flex" style={{marginBottom: 16}}>
-                        <Popconfirm title="Удалить выбранные залы?" okText="Удалить" cancelText="Отмена" onConfirm={() => this.handleBatchDelete}>
+                        <Popconfirm title="Удалить выбранные залы?" okText="Удалить" cancelText="Отмена" onConfirm={() => this.handleBatchDelete()}>
                             <Button type="danger" disabled={!hasSelected}>Удалить</Button>
                         </Popconfirm>
                         <Link to="/hall/create">

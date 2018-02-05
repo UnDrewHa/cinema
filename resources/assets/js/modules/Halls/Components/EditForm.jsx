@@ -82,7 +82,7 @@ class EditForm extends React.Component {
     
     parseScheme = (row, column, scheme) => {
         let checkboxes = [];
-        let newScheme = {...scheme};
+        let newScheme = {};
         
         for (let r = 0; r < row; r++) {
             for (let c = 0; c < column; c++) {
@@ -93,13 +93,11 @@ class EditForm extends React.Component {
                     key={`${r+1}-${c+1}`}
                     data-id={`${r+1}-${c+1}`}/>);
 
-                if (!newScheme.hasOwnProperty(`${r+1}-${c+1}`)) {
                     newScheme[`${r+1}-${c+1}`] = {
                         row: r+1,
                         column: c+1,
                         is_active: checked
                     };
-                }
             }
             checkboxes.push(<br key={r+100} />);
         }
@@ -151,8 +149,8 @@ class EditForm extends React.Component {
     
     handleSubmit = (e) => {
         e.preventDefault();
-        const {actions, hallsData, history, form} = this.props;
-        const saveAction = hallsData.id ? actions.update : actions.store;
+        const {actions, hallsData, history, form, match: {params}} = this.props;
+        const saveAction = params.id ? actions.update : actions.store;
         const scheme = values(this.state.scheme.scheme);
         
         form.validateFields((err, values) => {

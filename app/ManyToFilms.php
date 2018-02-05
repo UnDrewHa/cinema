@@ -11,4 +11,6 @@ class ManyToFilms extends Model
     }
 
     public $timestamps = false;
+    public $guarded = [];
+    public $fillable = ['name'];
 }
