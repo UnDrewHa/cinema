@@ -10,7 +10,7 @@ class FilmLicenseController extends Controller
 {
     public function index()
     {
-        return FilmLicense::all();
+        return FilmLicense::with(['cinema', 'film:id,name', 'filmFormat'])->get()->all();
     }
 
     public function store(Request $request)
@@ -35,7 +35,7 @@ class FilmLicenseController extends Controller
             'show_number' => request('show_number'),
         ]);
 
-        return response()->json($filmLicense);
+        return FilmLicense::with(['cinema', 'film:id,name', 'filmFormat'])->get()->all();
     }
 
     public function show(FilmLicense $filmLicense)
@@ -57,6 +57,7 @@ class FilmLicenseController extends Controller
         }
 
         $filmLicense->fill($request->all());
+        $filmLicense->save();
 
         return response()->json($filmLicense);
     }
@@ -65,6 +66,13 @@ class FilmLicenseController extends Controller
     {
         $filmLicense->delete();
 
-        return response()->json($filmLicense);
+        return FilmLicense::with(['cinema', 'film:id,name', 'filmFormat'])->get()->all();
+    }
+
+    public function batchDelete(Request $request)
+    {
+        FilmLicense::destroy($request->licenses);
+
+        return FilmLicense::with(['cinema', 'film:id,name', 'filmFormat'])->get()->all();
     }
 }

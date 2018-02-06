@@ -1,11 +1,12 @@
+import find from 'lodash/find';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, Icon } from 'antd';
 import { menu } from '../../../base/settings';
 
-function generateItem(item, index) {
+function generateItem(item) {
     return (
-        <Menu.Item key={index}>
+        <Menu.Item key={item.key}>
             <Link to={item.link}>
                 {item.icon && <Icon type={item.icon} />}
                 {item.label}
@@ -14,28 +15,32 @@ function generateItem(item, index) {
     );
 }
 
-function generateItemWithSubs(item, index) {
+function generateItemWithSubs(item) {
     return (
-        <Menu.SubMenu key={index} title={
+        <Menu.SubMenu key={item.key} title={
             <span>
                 {item.icon && <Icon type={item.icon} />}
                 {item.label}
             </span>}>
             {
-                item.items.map((item, index) => generateItem(item, `sub-${index}`))
+                item.items.map((item) => generateItem(item))
             }
         </Menu.SubMenu>
     );
 }
 
 export function MainMenu(props) {
+    let {selectedKey} = props;
     return (
-        <Menu {...menu}>
+        <Menu
+            {...menu}
+            selectedKeys={[selectedKey]}
+        >
             {
                 menu.items.map((item, index) => {
                     const Item = item.items ?
-                        generateItemWithSubs(item, index) :
-                        generateItem(item, index);
+                        generateItemWithSubs(item) :
+                        generateItem(item);
                     
                     return Item;
                 })

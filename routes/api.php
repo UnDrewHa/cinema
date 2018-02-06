@@ -30,6 +30,7 @@ Route::apiResources([
     'country' => 'CountryController',
     'age-limit' => 'AgeLimitController',
     'film' => 'FilmController',
+    'film-license' => 'FilmLicenseController',
 ]);
 
 Route::delete('/hall', 'HallController@batchDelete');
@@ -40,3 +41,4 @@ Route::delete('/country', 'CountryController@batchDelete');
 Route::delete('/film-format', 'FilmFormatController@batchDelete');
 Route::delete('/age-limit', 'AgeLimitController@batchDelete');
 Route::delete('/film', 'FilmController@batchDelete');
+Route::delete('/film-license', 'FilmLicenseController@batchDelete');

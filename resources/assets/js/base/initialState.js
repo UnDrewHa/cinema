@@ -46,5 +46,16 @@ export const initialState = {
             data: null,
             status: 2
         }
-    }
+    },
+    licenses: {
+        details: {
+            data: {},
+            status: 2
+        },
+        list: {
+            data: null,
+            status: 2
+        }
+    },
+    
 };

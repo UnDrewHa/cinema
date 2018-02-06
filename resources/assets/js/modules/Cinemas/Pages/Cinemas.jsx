@@ -1,7 +1,7 @@
 import includes from 'lodash/includes';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Row, Col, Card, Icon, Spin, Button, message } from 'antd';
+import { Row, Col, Card, Icon, Spin, Button, message, Popconfirm } from 'antd';
 import { CinemaEditModal } from '../Components/EditModal';
 import { CinemaActions } from '../Actions/CinemaActions';
 import { CinemaServices } from '../Services/CinemaServices';
@@ -59,7 +59,10 @@ class Cinemas extends React.Component {
                                             title={cinema.name}
                                             actions={[
                                                 <Icon type="edit" onClick={() => this.handleEdit(cinema)} />,
-                                                <Icon type="delete" onClick={() => this.handleDelete(cinema)} />]}>
+                                                <Popconfirm title="Удалить?" okText="Удалить" cancelText="Отмена" onConfirm={() => this.handleDelete(cinema)}>
+                                                    <Icon type="delete" />
+                                                </Popconfirm>
+                                                ]}>
                                             <p>
                                                 <b>Телефон: </b>
                                                 {cinema.phone}</p>

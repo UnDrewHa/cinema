@@ -18,6 +18,8 @@ import { FilmFormats } from '../../FilmFormats/Pages/FilmFormats';
 import { AgeLimits } from '../../AgeLimits/Pages/AgeLimits';
 import { Films } from '../../Films/Pages/Films';
 import { FilmEdit } from '../../Films/Pages/FilmEdit';
+import { Licenses } from '../../Licenses/Pages/Licenses';
+import { LicenseEdit } from '../../Licenses/Pages/LicenseEdit';
 
 const {Header, Content, Footer, Sider} = Layout;
 
@@ -42,7 +44,7 @@ export class Main extends React.Component {
                     width={270}
                 >
                     <div className="logo" />
-                    <MainMenu />
+                    <MainMenu selectedKey={this.props.location.pathname}/>
                 </Sider>
                 <Layout>
                     <Header style={{ background: '#fff', padding: 0 }}/>
@@ -63,6 +65,9 @@ export class Main extends React.Component {
                                 <Route path="/films" component={Films} />
                                 <Route path="/film/edit/:id" component={FilmEdit} />
                                 <Route path="/film/create" component={FilmEdit} />
+                                <Route path="/licenses" component={Licenses} />
+                                <Route path="/license/edit/:id" component={LicenseEdit} />
+                                <Route path="/license/create" component={LicenseEdit} />
                             </Switch>
                         </div>
                     </Content>

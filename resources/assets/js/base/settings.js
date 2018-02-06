@@ -1,67 +1,80 @@
 export const menu = {
-    defaultSelectedKeys: ['0'],
+    defaultSelectedKeys: ['/cinemas'],
+    defaultOpenKeys: ['/films'],
     items: [
         {
             icon: '',
             label: 'Кинотеатры',
-            link: '/cinemas'
+            link: '/cinemas',
+            key: '/cinemas',
         },
         {
             icon: '',
             label: 'Залы',
-            link: '/halls'
+            link: '/halls',
+            key: '/halls',
         },
         {
             icon: '',
             label: 'Фильмы',
             link: '/films',
+            key: '/films',
             items: [
                 {
                     icon: '',
                     label: 'Все фильмы',
-                    link: '/films'
+                    link: '/films',
+                    key: '/films',
                 },
                 {
                     icon: '',
                     label: 'Актеры',
-                    link: '/actors'
+                    link: '/actors',
+                    key: '/actors',
                 },
                 {
                     icon: '',
                     label: 'Возр. ограничение',
-                    link: '/age-limits'
+                    link: '/age-limits',
+                    key: '/age-limits',
                 },
                 {
                     icon: '',
                     label: 'Страна производства',
-                    link: '/countries'
+                    link: '/countries',
+                    key: '/countries',
                 },
                 {
                     icon: '',
                     label: 'Режиссеры',
-                    link: '/directors'
+                    link: '/directors',
+                    key: '/directors',
                 },
                 {
                     icon: '',
                     label: 'Форматы',
-                    link: '/film-formats'
+                    link: '/film-formats',
+                    key: '/film-formats',
                 },
                 {
                     icon: '',
                     label: 'Жанры',
-                    link: '/genres'
+                    link: '/genres',
+                    key: '/genres',
                 }
             ]
         },
-        {
-            icon: '',
-            label: 'Сеансы',
-            link: '/sessions'
-        },
+        // {
+        //     icon: '',
+        //     label: 'Сеансы',
+        //     link: '/sessions',
+        //     key: '/sessions',
+        // },
         {
             icon: '',
             label: 'Лицензии',
-            link: '/licenses'
+            link: '/licenses',
+            key: '/licenses',
         }
     ],
     mode: 'inline',
@@ -229,6 +242,33 @@ export const films = {
         failure: 'Ошибка при загрузке данных.'
     },
     FILMS_LOAD_BY_ID: {
+        success: '',
+        failure: 'Ошибка при загрузке данных.'
+    }
+};
+
+export const licenses = {
+    LICENSES_STORE: {
+        success: 'Новый элемент успешно добавлен.',
+        failure: 'Ошибка при добавлении элемента.'
+    },
+    LICENSES_DESTROY: {
+        success: 'Элемент удален.',
+        failure: 'Ошибка при удалении элемента.'
+    },
+    LICENSES_BATCH_DELETE: {
+        success: 'Элементы удалены.',
+        failure: 'Ошибка при удалении элементов.'
+    },
+    LICENSES_UPDATE: {
+        success: 'Данные элемента обновлены.',
+        failure: 'Ошибка при обновлении данных элемента.'
+    },
+    LICENSES_LOAD: {
+        success: '',
+        failure: 'Ошибка при загрузке данных.'
+    },
+    LICENSES_LOAD_BY_ID: {
         success: '',
         failure: 'Ошибка при загрузке данных.'
     }

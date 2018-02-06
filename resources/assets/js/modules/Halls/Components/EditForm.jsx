@@ -67,7 +67,7 @@ class EditForm extends React.Component {
     };
     
     componentWillReceiveProps({hallsData}) {
-        if (this.props.hallsData.id !== hallsData.id) {
+        if ((this.props.hallsData.id !== hallsData.id) || (hallsData.id && !this.props.form.getFieldValue('name'))) {
             this.props.form.setFieldsValue(hallsData);
             hallsData.places && hallsData.places.length > 0 && this.setState({
                 scheme: transformScheme(hallsData.places)

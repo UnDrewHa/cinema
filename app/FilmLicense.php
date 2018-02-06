@@ -23,4 +23,6 @@ class FilmLicense extends Model
     }
 
     public $timestamps = false;
+    public $guarded = [];
+    public $fillable = ['film_id','cinema_id','film_format_id','show_number'];
 }

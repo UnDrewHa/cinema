@@ -8,6 +8,7 @@ import { CountriesReducers } from '../modules/Countries/Reducers/CountriesReduce
 import { FilmFormatsReducers } from '../modules/FilmFormats/Reducers/FilmFormatsReducers';
 import { AgeLimitsReducers } from '../modules/AgeLimits/Reducers/AgeLimitsReducers';
 import { FilmsReducers } from '../modules/Films/Reducers/FilmsReducers';
+import { LicensesReducers } from '../modules/Licenses/Reducers/LicensesReducers';
 
 export const rootReducer = combineReducers({
     actors: ActorsReducer,
@@ -19,4 +20,5 @@ export const rootReducer = combineReducers({
     genres: GenresReducers,
     halls: HallsReducer,
     films: FilmsReducers,
+    licenses: LicensesReducers,
 });
