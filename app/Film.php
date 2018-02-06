@@ -31,4 +31,6 @@ class Film extends Model
     }
 
     public $timestamps = false;
+    public $guarded = [];
+    public $fillable = ['name', 'description', 'duration', 'trailer', 'cover', 'age_limit_id', 'director_id', 'genre_id', 'country_id'];
 }

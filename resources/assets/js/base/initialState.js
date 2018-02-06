@@ -36,5 +36,15 @@ export const initialState = {
             data: null,
             status: 2
         }
+    },
+    films: {
+        details: {
+            data: {},
+            status: 2
+        },
+        list: {
+            data: null,
+            status: 2
+        }
     }
 };

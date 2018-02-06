@@ -2,7 +2,8 @@ import React from 'react';
 import {
     Link,
     Switch,
-    Route
+    Route,
+    Redirect
 } from 'react-router-dom';
 import { Layout, Menu, Icon } from 'antd';
 import { MainMenu } from '../Components/Menu';
@@ -15,6 +16,8 @@ import { Genres } from '../../Genres/Pages/Genres';
 import { Countries } from '../../Countries/Pages/Countries';
 import { FilmFormats } from '../../FilmFormats/Pages/FilmFormats';
 import { AgeLimits } from '../../AgeLimits/Pages/AgeLimits';
+import { Films } from '../../Films/Pages/Films';
+import { FilmEdit } from '../../Films/Pages/FilmEdit';
 
 const {Header, Content, Footer, Sider} = Layout;
 
@@ -42,16 +45,11 @@ export class Main extends React.Component {
                     <MainMenu />
                 </Sider>
                 <Layout>
-                    <Header style={{ background: '#fff', padding: 0 }}>
-                        {/*<Icon*/}
-                            {/*className="sider-trigger"*/}
-                            {/*type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}*/}
-                            {/*onClick={this.handleToggleSidebar}*/}
-                        {/*/>*/}
-                    </Header>
+                    <Header style={{ background: '#fff', padding: 0 }}/>
                     <Content style={{ margin: '24px', padding: 24, background: '#fff' }}>
                         <div style={{background: '#fff', padding: 24}}>
                             <Switch>
+                                <Route exact path="/" render={() => <Redirect to="/cinemas" />} />
                                 <Route path="/cinemas" component={Cinemas} />
                                 <Route path="/halls" component={Halls} />
                                 <Route path="/hall/edit/:id" component={HallEdit} />
@@ -62,6 +60,9 @@ export class Main extends React.Component {
                                 <Route path="/countries" component={Countries} />
                                 <Route path="/film-formats" component={FilmFormats} />
                                 <Route path="/age-limits" component={AgeLimits} />
+                                <Route path="/films" component={Films} />
+                                <Route path="/film/edit/:id" component={FilmEdit} />
+                                <Route path="/film/create" component={FilmEdit} />
                             </Switch>
                         </div>
                     </Content>

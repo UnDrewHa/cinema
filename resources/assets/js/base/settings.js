@@ -207,6 +207,33 @@ export const halls = {
     }
 };
 
+export const films = {
+    FILMS_STORE: {
+        success: 'Новый фильм успешно добавлен.',
+        failure: 'Ошибка при добавлении фильма.'
+    },
+    FILMS_DESTROY: {
+        success: 'Фильм удален.',
+        failure: 'Ошибка при удалении фильма.'
+    },
+    FILMS_BATCH_DELETE: {
+        success: 'Фильмы удалены.',
+        failure: 'Ошибка при удалении фильмов.'
+    },
+    FILMS_UPDATE: {
+        success: 'Данные фильма обновлены.',
+        failure: 'Ошибка при обновлении данных фильма.'
+    },
+    FILMS_LOAD: {
+        success: '',
+        failure: 'Ошибка при загрузке данных.'
+    },
+    FILMS_LOAD_BY_ID: {
+        success: '',
+        failure: 'Ошибка при загрузке данных.'
+    }
+};
+
 export const actors = {
     ACTORS_STORE: {
         success: 'Новый актер успешно добавлен.',

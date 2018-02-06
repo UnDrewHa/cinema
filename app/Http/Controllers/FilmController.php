@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Validator;
 use App\Film;
 use Illuminate\Http\Request;
@@ -10,7 +11,7 @@ class FilmController extends Controller
 {
     public function index()
     {
-        return Film::all();
+        return Film::with(['director:id,name', 'genre:id,name', 'country:id,name', 'ageLimit:id,name'])->get()->all();
     }
 
     public function store(Request $request)
@@ -20,38 +21,43 @@ class FilmController extends Controller
             'director_id' => 'required|integer',
             'genre_id' => 'required|integer',
             'country_id' => 'required|integer',
-            'name' => 'required|unique:films|min:3',
-            'duration' => 'required|min:3',
-            'description' => 'required|min:3',
-            'trailer' => 'required|min:3',
-            'cover' => 'required|min:3'
+            'name' => 'required|unique:films',
+            'duration' => 'required',
+            'description' => 'required',
+            'trailer' => 'required',
+            'cover' => 'required'
         ], [
-            'required' => 'Поле обязательно для заполнения.',
-            'min' => 'Минимальное количество символов - :min.'
+            'required' => 'Поле обязательно для заполнения.'
         ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors());
         }
 
-        $film = Film::create([
-            'age_limit_id' => request('age_limit_id'),
-            'director_id' => request('director_id'),
-            'genre_id' => request('genre_id'),
-            'country_id' => request('country_id'),
-            'name' => request('name'),
-            'duration' => request('duration'),
-            'description' => request('description'),
-            'trailer' => request('trailer'),
-            'cover' => request('cover'),
-        ]);
+        DB::transaction(function () {
+            $film = Film::create([
+                'age_limit_id' => request('age_limit_id'),
+                'director_id' => request('director_id'),
+                'genre_id' => request('genre_id'),
+                'country_id' => request('country_id'),
+                'name' => request('name'),
+                'duration' => request('duration'),
+                'description' => request('description'),
+                'trailer' => request('trailer'),
+                'cover' => request('cover'),
+            ]);
 
-        return response()->json($film);
+            if (count(request('actors')) > 0) {
+                $film->actors()->sync(request('actors'));
+            }
+        });
+
+        return Film::with(['director:id,name', 'genre:id,name', 'country:id,name', 'ageLimit:id,name'])->get()->all();
     }
 
     public function show(Film $film)
     {
-        return response()->json($film);
+        return response()->json($film->load('actors'));
     }
 
     public function update(Request $request, Film $film)
@@ -61,14 +67,13 @@ class FilmController extends Controller
             'director_id' => 'integer',
             'genre_id' => 'integer',
             'country_id' => 'integer',
-            'name' => '|unique:filmsmin:3',
-            'duration' => 'min:3',
-            'description' => 'min:3',
-            'trailer' => 'min:3',
-            'cover' => 'min:3'
+            'name' => '|unique:films,name,'.$film->id,
+            'duration' => 'min:1',
+            'description' => 'min:1',
+            'trailer' => 'min:1',
+            'cover' => 'min:1'
         ], [
-            'required' => 'Поле обязательно для заполнения.',
-            'min' => 'Минимальное количество символов - :min.'
+            'required' => 'Поле обязательно для заполнения.'
         ]);
 
         if ($validator->fails()) {
@@ -76,14 +81,26 @@ class FilmController extends Controller
         }
 
         $film->fill($request->all());
+        $film->save();
 
-        return response()->json($film);
+        if (count(request('actors')) > 0) {
+            $film->actors()->sync(request('actors'));
+        }
+
+        return Film::with(['director:id,name', 'genre:id,name', 'country:id,name', 'ageLimit:id,name'])->get()->all();
     }
 
     public function destroy(Film $film)
     {
         $film->delete();
 
-        return response()->json($film);
+        return Film::with(['director:id,name', 'genre:id,name', 'country:id,name', 'ageLimit:id,name'])->get()->all();
+    }
+
+    public function batchDelete(Request $request)
+    {
+        Film::destroy($request->films);
+
+        return Film::with(['director:id,name', 'genre:id,name', 'country:id,name', 'ageLimit:id,name'])->get()->all();
     }
 }
